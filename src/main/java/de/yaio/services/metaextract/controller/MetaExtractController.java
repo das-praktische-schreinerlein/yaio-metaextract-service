@@ -54,15 +54,26 @@ public class MetaExtractController {
      * @FeatureResult                returns extracted metadata from url
      * @FeatureKeywords              Webservice
      * @param url                    the url to download and extract metadata from
+     * @param lang                   the prevered lang to parse (OCR)
      * @param request                the request-obj to get the servlet-context 
      * @param response               the response-Obj to set contenttype and headers
      * @return                       the extracted metadata
+     * @throws IOException           possible
      */
     @RequestMapping(method = RequestMethod.POST, 
                     value = "/getByUrl")
-    public @ResponseBody String getByUrl(@RequestParam(value="url", required=true) String url,
-                                            HttpServletRequest request, HttpServletResponse response) {
-        String meta = "";
+    public @ResponseBody ExtractedMetaData getByUrl(@RequestParam(value="url", required=true) String url,
+                                                    @RequestParam("lang") String lang,
+                                                    HttpServletRequest request, 
+                                                    HttpServletResponse response) throws IOException {
+        ExtractedMetaData meta = null;
+        try {
+            meta = metaExtractUtils.extractMetaData(url, lang);
+        } catch (IOException | SAXException | TikaException e) {
+            e.printStackTrace();
+            response.setStatus(404);
+            response.getWriter().append("error while reading:" + e.getMessage());
+        }
         return meta;
     }
 
@@ -82,7 +93,8 @@ public class MetaExtractController {
                     value = "/getByFile")
     public @ResponseBody ExtractedMetaData getByFile(@RequestParam("file") MultipartFile uploadFile,
                                                      @RequestParam("lang") String lang,
-                                            HttpServletRequest request, HttpServletResponse response) throws IOException {
+                                                     HttpServletRequest request, 
+                                                     HttpServletResponse response) throws IOException {
         ExtractedMetaData meta = null;
         try {
             meta = metaExtractUtils.extractMetaData(uploadFile.getInputStream(), uploadFile.getOriginalFilename(), lang);

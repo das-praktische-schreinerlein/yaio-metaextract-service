@@ -18,7 +18,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
+
+import javax.imageio.ImageIO;
+import javax.imageio.ImageReader;
 
 import net.sourceforge.tess4j.Tesseract;
 import net.sourceforge.tess4j.TesseractException;
@@ -60,6 +64,10 @@ public class TesseractExtractor extends AbstractExtractor implements Extractor {
     
     @Override
     public String extractText(final File file, final String lang) throws IOException  {
+        if (!isFileSupported(file.getName())) {
+            return "";
+        }
+        
         Tesseract instance = new Tesseract();
         instance.setDatapath(tessDatapath);
         
@@ -75,16 +83,39 @@ public class TesseractExtractor extends AbstractExtractor implements Extractor {
             result = instance.doOCR(file);
         } catch (TesseractException e) {
             if (RuntimeException.class.isInstance(e.getCause())) {
-                throw new IOException("error while using tesseract to extract (not supported) from:" + file.getAbsolutePath());
+                throw new IOException("error while using tesseract to extract (not supported) from:" 
+                                + file.getAbsolutePath());
             }
             e.printStackTrace();
             throw new IOException("error while using tesseract to extract from:" + file.getAbsolutePath());
         }
         return result;
     }
-
+    
     @Override
     public String identifyLanguage(final String text) {
         return "UNKNOWN";
     }
+
+    @Override
+    public String getParserName() {
+        return "OCR Tesseract";
+    }
+
+    protected boolean isFileSupported(final String imageFileName) {
+        String imageFormat = imageFileName.substring(imageFileName.lastIndexOf('.') + 1);
+        if (imageFormat.matches("(pbm|pgm|ppm)")) {
+            imageFormat = "pnm";
+        } else if (imageFormat.matches("(jp2|j2k|jpf|jpx|jpm)")) {
+            imageFormat = "jpeg2000";
+        }
+        Iterator<ImageReader> readers = ImageIO.getImageReadersByFormatName(imageFormat);
+
+        if (!readers.hasNext()) {
+            return false;
+        }
+        
+        return true;
+    }
+
 }

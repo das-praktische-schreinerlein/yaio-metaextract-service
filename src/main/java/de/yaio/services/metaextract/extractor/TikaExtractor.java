@@ -65,4 +65,9 @@ public class TikaExtractor extends AbstractExtractor implements Extractor {
         LanguageIdentifier identifier = new LanguageIdentifier(text);
         return identifier.getLanguage();
     }
+
+    @Override
+    public String getParserName() {
+        return "Textextract TIKA";
+    }
 }

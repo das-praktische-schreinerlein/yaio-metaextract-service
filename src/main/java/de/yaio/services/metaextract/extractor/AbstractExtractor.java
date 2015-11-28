@@ -35,6 +35,7 @@ public abstract class AbstractExtractor implements Extractor {
         String content = this.extractText(input, fileName, lang);
         content = normalizeText(content);
 
+        extractedMetaDataVersion.setParserName(this.getParserName());
         extractedMetaDataVersion.setContent(content);
         extractedMetaDataVersion.setLang(this.identifyLanguage(extractedMetaDataVersion.getContent()));
 
@@ -48,6 +49,7 @@ public abstract class AbstractExtractor implements Extractor {
         String content = this.extractText(file, lang);
         content = normalizeText(content);
 
+        extractedMetaDataVersion.setParserName(this.getParserName());
         extractedMetaDataVersion.setContent(content);
         extractedMetaDataVersion.setLang(this.identifyLanguage(extractedMetaDataVersion.getContent()));
 

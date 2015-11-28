@@ -38,4 +38,6 @@ public interface Extractor {
     public ExtractedMetaDataVersion extractMetaData(InputStream input, String fileName, String lang) throws IOException;
 
     public ExtractedMetaDataVersion extractMetaData(File file, String lang) throws IOException;
+
+    public String getParserName();
 }

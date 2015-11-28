@@ -27,14 +27,17 @@ package de.yaio.services.metaextract.extractor;
 public class ExtractedMetaDataVersion {
     private String content;
     private String lang;
+    private String parserName;
 
     public ExtractedMetaDataVersion() {
 
     }
-    public ExtractedMetaDataVersion(final String content, final String lang) {
+    public ExtractedMetaDataVersion(final String content, final String lang, final String parserName) {
         super();
-        this.content = content;
+        this.setContent(content);
         this.setLang(lang);
+        this.setParserName(parserName);
+        
     }
     public String getContent() {
         return this.content;
@@ -44,16 +47,16 @@ public class ExtractedMetaDataVersion {
         this.content = content;
     }
 
-    /**
-     * @return the {@link ExtractedMetaDataVersion#lang}
-     */
     public String getLang() {
         return lang;
     }
-    /**
-     * @param lang the {@link ExtractedMetaDataVersion#lang} to set
-     */
     public void setLang(final String lang) {
         this.lang = lang;
+    }
+    public String getParserName() {
+        return this.parserName;
+    }
+    public void setParserName(String parserName) {
+        this.parserName = parserName;
     }
 }
