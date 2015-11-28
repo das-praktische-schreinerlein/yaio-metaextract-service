@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.util.EntityUtils;
@@ -75,7 +76,11 @@ class MetaExtractUtils {
         for (Extractor extractor : extractors) {
             try {
                 ExtractedMetaDataVersion extractedMetaDataVersion = extractor.extractMetaData(tmpFile, lang);
-                extractedMetaData.getVersions().put(extractor.getClass().toString(), extractedMetaDataVersion);
+                
+                String content = extractedMetaDataVersion.getContent();
+                if (StringUtils.isNotBlank(content)) {
+                    extractedMetaData.getVersions().put(extractor.getClass().toString(), extractedMetaDataVersion);
+                }
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
