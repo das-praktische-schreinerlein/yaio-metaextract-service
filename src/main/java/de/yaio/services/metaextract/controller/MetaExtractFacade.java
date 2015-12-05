@@ -23,8 +23,8 @@ import java.util.List;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.builder.RecursiveToStringStyle;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.util.EntityUtils;
@@ -104,9 +104,9 @@ class MetaExtractFacade {
         if (!getNetFirewall().isUrlAllowed(url)) {
             LOGGER.warn("illegal request for url:" + url 
                             + " disallowed by NetFirewall:" 
-                            + new ReflectionToStringBuilder(getNetFirewall(), new RecursiveToStringStyle()).toString()
+                            + new ReflectionToStringBuilder(getNetFirewall(), ToStringStyle.SHORT_PREFIX_STYLE).toString()
                             + " with config:" 
-                            + new ReflectionToStringBuilder(firewallConfig, new RecursiveToStringStyle()).toString());
+                            + new ReflectionToStringBuilder(firewallConfig, ToStringStyle.SHORT_PREFIX_STYLE).toString());
             throw new IOException("illegal request for url:" + url 
                             + " disallowed by NetFirewall");
         }
