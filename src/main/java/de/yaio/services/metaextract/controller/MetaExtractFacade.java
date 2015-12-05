@@ -57,7 +57,6 @@ import de.yaio.services.metaextract.extractor.TikaExtractor;
  */
 @Service
 class MetaExtractFacade {
-
     private static final Logger LOGGER = Logger.getLogger(MetaExtractFacade.class);
 
     @Autowired
@@ -78,7 +77,7 @@ class MetaExtractFacade {
 
         File tmpFile = File.createTempFile("metaextractor", "." + FilenameUtils.getExtension(fileName));
         tmpFile.deleteOnExit();
-        Files.copy(input , tmpFile.toPath(), java.nio.file.StandardCopyOption.REPLACE_EXISTING);
+        Files.copy(input, tmpFile.toPath(), java.nio.file.StandardCopyOption.REPLACE_EXISTING);
 
         ExtractedMetaData extractedMetaData = new ExtractedMetaData();
 
