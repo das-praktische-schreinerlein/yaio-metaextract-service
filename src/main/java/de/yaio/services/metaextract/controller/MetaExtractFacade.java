@@ -23,6 +23,8 @@ import java.util.List;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.builder.RecursiveToStringStyle;
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.util.EntityUtils;
@@ -35,6 +37,8 @@ import org.springframework.stereotype.Service;
 import org.xml.sax.SAXException;
 
 import de.yaio.commons.http.HttpUtils;
+import de.yaio.commons.net.NetFirewall;
+import de.yaio.commons.net.NetFirewallFactory;
 import de.yaio.services.metaextract.extractor.ExtractedMetaData;
 import de.yaio.services.metaextract.extractor.ExtractedMetaDataVersion;
 import de.yaio.services.metaextract.extractor.Extractor;
@@ -52,16 +56,21 @@ import de.yaio.services.metaextract.extractor.TikaExtractor;
  * @license                      http://mozilla.org/MPL/2.0/ Mozilla Public License 2.0
  */
 @Service
-class MetaExtractUtils {
+class MetaExtractFacade {
 
-    private static final Logger LOGGER = Logger.getLogger(MetaExtractUtils.class);
+    private static final Logger LOGGER = Logger.getLogger(MetaExtractFacade.class);
 
     @Autowired
     protected TikaExtractor extractor1;
 
     @Autowired
     protected TesseractExtractor extractor2;
-
+    
+    @Autowired
+    protected MetaExtractFirewallConfig firewallConfig;
+    
+    protected NetFirewall netFirewall;
+    
     public ExtractedMetaData extractMetaData(final InputStream input, final String fileName, final String lang) throws IOException, SAXException, TikaException  {
         List<Extractor> extractors = new ArrayList<Extractor>();
         extractors.add(extractor1);
@@ -91,6 +100,17 @@ class MetaExtractUtils {
     }
 
     public ExtractedMetaData extractMetaData(final String url, final String lang) throws IOException, SAXException, TikaException  {
+        // check url
+        if (!getNetFirewall().isUrlAllowed(url)) {
+            LOGGER.warn("illegal request for url:" + url 
+                            + " disallowed by NetFirewall:" 
+                            + new ReflectionToStringBuilder(getNetFirewall(), new RecursiveToStringStyle()).toString()
+                            + " with config:" 
+                            + new ReflectionToStringBuilder(firewallConfig, new RecursiveToStringStyle()).toString());
+            throw new IOException("illegal request for url:" + url 
+                            + " disallowed by NetFirewall");
+        }
+        
         // call url
         HttpResponse response = HttpUtils.callGetUrlPure(url, "anonymous", "anonymous", null);
         HttpEntity entity = response.getEntity();
@@ -115,4 +135,10 @@ class MetaExtractUtils {
         return extractMetaData(input, fileName, lang);
     }
 
+    protected NetFirewall getNetFirewall() {
+        if (netFirewall == null) {
+            netFirewall = NetFirewallFactory.creatNetFirewall(firewallConfig);
+        }
+        return netFirewall;
+    }
 }
