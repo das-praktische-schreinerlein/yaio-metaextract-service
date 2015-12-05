@@ -18,6 +18,7 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
 import org.apache.tika.exception.TikaException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -45,8 +46,10 @@ import de.yaio.services.metaextract.extractor.ExtractedMetaData;
 @RequestMapping("${yaio-metaextract-service.baseurl}")
 public class MetaExtractController {
 
+    private static final Logger LOGGER = Logger.getLogger(MetaExtractController.class);
+
     @Autowired
-    protected MetaExtractUtils metaExtractUtils;
+    protected MetaExtractFacade metaExtractFacade;
 
     /** 
      * downloads the url and extracts metadata
@@ -68,9 +71,9 @@ public class MetaExtractController {
                                                     HttpServletResponse response) throws IOException {
         ExtractedMetaData meta = null;
         try {
-            meta = metaExtractUtils.extractMetaData(url, lang);
+            meta = metaExtractFacade.extractMetaData(url, lang);
         } catch (IOException | SAXException | TikaException e) {
-            e.printStackTrace();
+            LOGGER.warn("exception start for url:" + url, e);
             response.setStatus(404);
             response.getWriter().append("error while reading:" + e.getMessage());
         }
@@ -97,9 +100,10 @@ public class MetaExtractController {
                                                      HttpServletResponse response) throws IOException {
         ExtractedMetaData meta = null;
         try {
-            meta = metaExtractUtils.extractMetaData(uploadFile.getInputStream(), uploadFile.getOriginalFilename(), lang);
+            meta = metaExtractFacade.extractMetaData(uploadFile.getInputStream(), 
+                            uploadFile.getOriginalFilename(), lang);
         } catch (IOException | SAXException | TikaException e) {
-            e.printStackTrace();
+            LOGGER.warn("exception start for file:" + uploadFile, e);
             response.setStatus(404);
             response.getWriter().append("error while reading:" + e.getMessage());
         }
