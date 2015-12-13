@@ -35,6 +35,7 @@ A webservice to extrct metadata from uploaded documents or urls.
 - **Data Parser**
     - [Apache TiKa](https://github.com/apache/tika/)
     - [Tesseract](https://github.com/tesseract-ocr/tesseract)
+    - [Tess4J](http://tess4j.sourceforge.net/)
 
 # License
     /**
