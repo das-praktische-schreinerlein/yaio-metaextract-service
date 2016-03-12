@@ -34,13 +34,6 @@ import org.springframework.stereotype.Service;
 
 /** 
  * services to extract data via tika
- *  
- * @FeatureDomain                service
- * @package                      de.yaio.services.metaextract.extractor
- * @author                       Michael Schreiner <michael.schreiner@your-it-fellow.de>
- * @category                     extractor-services
- * @copyright                    Copyright (c) 2014, Michael Schreiner
- * @license                      http://mozilla.org/MPL/2.0/ Mozilla Public License 2.0
  */
 @Service
 public class TesseractExtractor extends AbstractExtractor implements Extractor {

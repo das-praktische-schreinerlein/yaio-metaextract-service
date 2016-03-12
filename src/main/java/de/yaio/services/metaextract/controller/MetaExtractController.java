@@ -34,13 +34,6 @@ import de.yaio.services.metaextract.extractor.ExtractedMetaData;
 
 /** 
  * controller to extract metadata from uploaded files or urls
- *  
- * @FeatureDomain                Webservice
- * @package                      de.yaio.services.metaextract.controller
- * @author                       Michael Schreiner <michael.schreiner@your-it-fellow.de>
- * @category                     extractor-services
- * @copyright                    Copyright (c) 2014, Michael Schreiner
- * @license                      http://mozilla.org/MPL/2.0/ Mozilla Public License 2.0
  */
 @Controller
 @RequestMapping("${yaio-metaextract-service.baseurl}")
@@ -53,9 +46,6 @@ public class MetaExtractController {
 
     /** 
      * downloads the url and extracts metadata
-     * @FeatureDomain                Webservice
-     * @FeatureResult                returns extracted metadata from url
-     * @FeatureKeywords              Webservice
      * @param url                    the url to download and extract metadata from
      * @param lang                   the prevered lang to parse (OCR)
      * @param request                the request-obj to get the servlet-context 
@@ -82,9 +72,6 @@ public class MetaExtractController {
 
     /** 
      * extract metadata from the uploaded file
-     * @FeatureDomain                Webservice
-     * @FeatureResult                returns extracted metadata from url
-     * @FeatureKeywords              Webservice
      * @param uploadFile             the file to extract metadata from
      * @param lang                   the prevered lang to parse (OCR)
      * @param request                the request-obj to get the servlet-context 

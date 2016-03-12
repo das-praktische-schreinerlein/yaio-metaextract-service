@@ -19,13 +19,6 @@ import java.io.InputStream;
 
 /** 
  * services to extract data
- *  
- * @FeatureDomain                service
- * @package                      de.yaio.services.metaextract.extractor
- * @author                       Michael Schreiner <michael.schreiner@your-it-fellow.de>
- * @category                     extractor-services
- * @copyright                    Copyright (c) 2014, Michael Schreiner
- * @license                      http://mozilla.org/MPL/2.0/ Mozilla Public License 2.0
  */
 public abstract class AbstractExtractor implements Extractor {
     @Override

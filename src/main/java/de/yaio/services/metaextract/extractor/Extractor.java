@@ -19,25 +19,18 @@ import java.io.InputStream;
 
 /** 
  * services to extract data
- *  
- * @FeatureDomain                service
- * @package                      de.yaio.services.metaextract.extractor
- * @author                       Michael Schreiner <michael.schreiner@your-it-fellow.de>
- * @category                     extractor-services
- * @copyright                    Copyright (c) 2014, Michael Schreiner
- * @license                      http://mozilla.org/MPL/2.0/ Mozilla Public License 2.0
  */
 public interface Extractor {
 
-    public String extractText(InputStream input, String fileName, String lang) throws IOException;
+    String extractText(InputStream input, String fileName, String lang) throws IOException;
 
-    public String extractText(File file, String lang) throws IOException;
+    String extractText(File file, String lang) throws IOException;
 
-    public String identifyLanguage(String text);
+    String identifyLanguage(String text);
 
-    public ExtractedMetaDataVersion extractMetaData(InputStream input, String fileName, String lang) throws IOException;
+    ExtractedMetaDataVersion extractMetaData(InputStream input, String fileName, String lang) throws IOException;
 
-    public ExtractedMetaDataVersion extractMetaData(File file, String lang) throws IOException;
+    ExtractedMetaDataVersion extractMetaData(File file, String lang) throws IOException;
 
-    public String getParserName();
+    String getParserName();
 }

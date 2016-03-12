@@ -47,13 +47,6 @@ import de.yaio.services.metaextract.extractor.TikaExtractor;
 
 /** 
  * services to extract metadata
- *  
- * @FeatureDomain                service
- * @package                      de.yaio.services.metaextract.controller
- * @author                       Michael Schreiner <michael.schreiner@your-it-fellow.de>
- * @category                     metadata-services
- * @copyright                    Copyright (c) 2014, Michael Schreiner
- * @license                      http://mozilla.org/MPL/2.0/ Mozilla Public License 2.0
  */
 @Service
 class MetaExtractFacade {
