@@ -3,10 +3,16 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.3.0.RELEASE</version>
+    </parent>
+
     <!-- the base -->
     <groupId>de.yaio.services</groupId>
     <artifactId>yaio-metaextract-service</artifactId>
-    <version>0.2.2</version>
+    <version>0.3.0-SNAPSHOT</version>
     <name>Yaio-MetaExtract-service</name>
     <description>YourAllInOne MetaExtract-Service</description>
     <url>https://github.com/das-praktische-schreinerlein/yaio-metaextract-service</url>
@@ -15,93 +21,14 @@
         <url>http://www.your-all-in-one.de</url>
     </organization>
 
-    <!-- for spring boot -->
-    <parent>
-        <groupId>de.yaio</groupId>
-        <artifactId>yaio-pom-webstarter</artifactId>
-        <version>0.1.0</version>
-    </parent>
+    <packaging>pom</packaging>
 
-    <properties>
-        <!--
-          ##################
-          # Packaging defaults
-          ##################
-         -->
-        <!-- packaging - change it with "mvn package -Dpackaging.type=jar" -->
-        <packaging.type>jar</packaging.type>
-        <!-- assembly a jar with all dependencies - activate it with "mvn package -Dpackaging.assembly-phase=package" -->
-        <packaging.assembly-phase>none</packaging.assembly-phase>
-        <!-- shade to an ueber-jar - activate it with "mvn package -Dpackaging.shade-phase=package" -->
-        <packaging.shade-phase>none</packaging.shade-phase>
-        <!-- prepare for springboot - activate it with "mvn package -Dpackaging.springboot-phase=package" -->
-        <packaging.springboot-phase>none</packaging.springboot-phase>
-
-        <!--  maven install -->
-        <groupId>${project.groupId}</groupId>
-        <artifactId>${project.artifactId}</artifactId>
-        <version>${project.version}</version>
-        <packaging>${packaging.type}</packaging>
-        <file>target/${project.artifactId}-${project.version}.${packaging.type}</file>
-
-        <!--
-          ##################
-          # Projectdata
-          ##################
-         -->
-        <!--  project -->
-        <start-class>de.yaio.services.metaextract.MetaExtractApplication</start-class>
-        
-        <!--
-          ##################
-          # dependency versions
-          ##################
-         -->
-         
-        <!-- Yaio versions -->
-        <yaio-commons.version>[0.3.0,0.4.0)</yaio-commons.version>
-
-
-        <tika-parsers.version>1.9</tika-parsers.version>
-        <tess4j.version>2.0.1</tess4j.version>
-    </properties>
-
-
-    <!-- packaging jar or war and version -->
-    <packaging>${packaging.type}</packaging>
-
-    <!-- use these repositories to solve dependencies and get jars -->
-    <repositories>
-        <repository>
-            <id>git-das-praktische-schreinerlein</id>
-            <name>das-praktische-schreinerlein's Git based repo</name>
-            <url>https://github.com/das-praktische-schreinerlein/maven-repo/raw/master/</url>
-        </repository>
-    </repositories>
-
-    <dependencies>
-        <dependency>
-            <groupId>org.apache.tika</groupId>
-            <artifactId>tika-parsers</artifactId>
-            <version>${tika-parsers.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>net.sourceforge.tess4j</groupId>
-            <artifactId>tess4j</artifactId>
-            <version>${tess4j.version}</version>
-        </dependency>
-
-        <!-- yaio-services / via jitpack.io because of no maven-centra-account -->
-        <dependency>
-            <groupId>de.yaio</groupId>
-            <!-- 
-            <groupId>com.github.das-praktische-schreinerlein</groupId>
-             -->
-            <artifactId>yaio-commons</artifactId>
-            <version>${yaio-commons.version}</version>
-        </dependency>
-    </dependencies>
-
-    <build>
-    </build>
+    <modules>
+        <module>yaio-metaextract-service-pom-parent</module>
+        <module>yaio-metaextract-service-pom-springboot</module>
+        <module>yaio-metaextract-service-pom-springboot-web</module>
+        <module>yaio-metaextract-service-api</module>
+        <module>yaio-metaextract-service-server</module>
+        <module>yaio-metaextract-service-full</module>
+    </modules>
 </project>
