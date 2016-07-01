@@ -8,21 +8,9 @@ A webservice to extrct metadata from uploaded documents or urls.
 - test it
 
         mvn install
-        mvn spring-boot:run
-        curl --user metaextract:secret -X POST http://localhost:8083/services/metaextract/getByUrl -F 'url=http://www.google.de'
-        curl --user metaextract:secret -X POST http://localhost:8083/services/metaextract/getByFile -F 'file=@/cygdrive/d/tmp/readme.txt'
-
-- to build it as standalone-jar with all dependencies take a look at pom.xml
-
-        <!-- packaging - change it with "mvn package -Dpackaging.type=jar" -->
-        <packaging.type>jar</packaging.type>
-        <!-- assembly a jar with all dependencies - activate it with "mvn package -Dpackaging.assembly-phase=package" -->
-        <packaging.assembly-phase>none</packaging.assembly-phase>
-        <!-- shade to an ueber-jar - activate it with "mvn package -Dpackaging.shade-phase=package" -->
-        <packaging.shade-phase>none</packaging.shade-phase>
-        <!-- prepare for springboot - activate it with "mvn package -Dpackaging.springboot-phase=package" -->
-        <packaging.springboot-phase>none</packaging.springboot-phase>
-
+        java -Xmx768m -Xms128m -Dspring.config.location=file:config/metaextract-application.properties -Dlog4j.configuration=file:config/log4j.properties -cp "dist/yaio-metaextract-service-full.jar" de.yaio.services.metaextract.server.MetaExtractApplication --config config/metaextract-application.properties
+        curl --user metaextract:secret -X POST http://localhost:8082/services/metaextract/getByUrl -F 'url=http://www.google.de' -F 'lang=de'
+        curl --user metaextract:secret -X POST http://localhost:8082/services/metaextract/getByFile -F 'file=@/cygdrive/d/tmp/readme.txt' -F 'lang=de'
 
 # Thanks to
 - **Build-Tools**
