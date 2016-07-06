@@ -23,7 +23,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -115,7 +114,7 @@ public class MetaExtractController {
     }
 
     protected String createRequestLogMessage(HttpServletRequest request) {
-        final StringBuilder logMessage = new StringBuilder("REST Request - ")
+        return new StringBuilder("REST Request - ")
                 .append("[HTTP METHOD:")
                 .append(request.getMethod())
                 .append("] [URL:")
@@ -124,9 +123,7 @@ public class MetaExtractController {
                 .append(getRequestMap(request))
                 .append("] [REMOTE ADDRESS:")
                 .append(request.getRemoteAddr())
-                .append("]");
-
-        return logMessage.toString();
+                .append("]").toString();
     }
 
     private Map<String, String> getRequestMap(HttpServletRequest request) {
