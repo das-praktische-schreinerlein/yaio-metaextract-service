@@ -33,21 +33,23 @@ import java.io.InputStream;
 public class TikaExtractor extends AbstractExtractor implements Extractor {
     
     @Override
-    public String extractText(final File file, final String lang) throws IOException  {
-        return extractText(new FileInputStream(file), file.getAbsolutePath(), lang);
+    public String extractText(final File file, final String lang) throws IOException, ExtractorException  {
+        FileInputStream inputStream = new FileInputStream(file);
+        return extractText(inputStream, file.getAbsolutePath(), lang);
     }
     
     @Override
-    public String extractText(final InputStream input, final String fileName, final String lang) throws IOException  {
+    public String extractText(final InputStream input, final String fileName, final String lang) throws IOException, ExtractorException  {
         BodyContentHandler handler = new BodyContentHandler();
         AutoDetectParser parser = new AutoDetectParser();
         Metadata metadata = new Metadata();
 
         try {
             parser.parse(input, handler, metadata);
-        } catch (SAXException | TikaException e) {
-            e.printStackTrace();
-            throw new IOException("error while using tika");
+        } catch (TikaException e) {
+            throw new ExtractorException("TikaException while parsing file", fileName, e);
+        } catch (SAXException e) {
+            throw new ExtractorException("SAXException while parsing file", fileName, e);
         }
         
         return handler.toString();

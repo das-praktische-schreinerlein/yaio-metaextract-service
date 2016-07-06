@@ -36,7 +36,7 @@ import java.util.Map;
 @Service
 public class TesseractExtractor extends AbstractExtractor implements Extractor {
     
-    private static Map<String,String>langMap = new HashMap<String, String>();
+    private static Map<String,String>langMap = new HashMap<>();
     static {
         langMap.put("de",  "deu");
         langMap.put("en",  "eng");
@@ -46,15 +46,16 @@ public class TesseractExtractor extends AbstractExtractor implements Extractor {
     private String tessDatapath ;
     
     @Override
-    public String extractText(final InputStream input, final String fileName, final String lang) throws IOException  {
-        File tmpFile = File.createTempFile("metaextractor", "." + FilenameUtils.getExtension(fileName));
+    public String extractText(final InputStream input, final String fileName, final String lang) throws IOException, ExtractorException  {
+        File tmpFile;
+        tmpFile = File.createTempFile("metaextractor", "." + FilenameUtils.getExtension(fileName));
         tmpFile.deleteOnExit();
-        Files.copy(input , tmpFile.toPath(), java.nio.file.StandardCopyOption.REPLACE_EXISTING);
+        Files.copy(input, tmpFile.toPath(), java.nio.file.StandardCopyOption.REPLACE_EXISTING);
         return this.extractText(tmpFile, lang);
     }
     
     @Override
-    public String extractText(final File file, final String lang) throws IOException  {
+    public String extractText(final File file, final String lang) throws IOException, ExtractorException  {
         if (!isFileSupported(file.getName())) {
             return "";
         }
@@ -69,16 +70,15 @@ public class TesseractExtractor extends AbstractExtractor implements Extractor {
         }
         instance.setLanguage(tessLang);
         
-        String result = "";
+        String result;
         try {
             result = instance.doOCR(file);
         } catch (TesseractException e) {
             if (RuntimeException.class.isInstance(e.getCause())) {
-                throw new IOException("error while using tesseract to extract (not supported) from:" 
-                                + file.getAbsolutePath());
+                throw new ExtractorException("error while using tesseract to extract from not supported file",
+                        file.getAbsolutePath(), e);
             }
-            e.printStackTrace();
-            throw new IOException("error while using tesseract to extract from:" + file.getAbsolutePath());
+            throw new ExtractorException("error while using tesseract to extract from file", file.getAbsolutePath(), e);
         }
         return result;
     }

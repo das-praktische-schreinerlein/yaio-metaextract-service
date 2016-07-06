@@ -76,9 +76,7 @@
          -->
 
         <!-- Yaio versions -->
-        <!-- Yaio versions -->
-        <yaio-commons.version>[0.3.0,0.4.0)</yaio-commons.version>
-
+        <yaio-commons.version>[0.4.0-SNAPSHOT,0.5.0)</yaio-commons.version>
 
         <tika-parsers.version>1.9</tika-parsers.version>
         <tess4j.version>2.0.1</tess4j.version>

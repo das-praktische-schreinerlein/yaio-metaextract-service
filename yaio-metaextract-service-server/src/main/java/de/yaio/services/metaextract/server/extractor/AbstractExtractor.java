@@ -24,7 +24,8 @@ import java.io.InputStream;
  */
 public abstract class AbstractExtractor implements Extractor {
     @Override
-    public ExtractedMetaDataVersion extractMetaData(final InputStream input, final String fileName, final String lang) throws IOException {
+    public ExtractedMetaDataVersion extractMetaData(final InputStream input, final String fileName, final String lang)
+            throws IOException, ExtractorException {
         ExtractedMetaDataVersion extractedMetaDataVersion = new ExtractedMetaDataVersion();
 
         String content = this.extractText(input, fileName, lang);
@@ -38,7 +39,7 @@ public abstract class AbstractExtractor implements Extractor {
     }
 
     @Override
-    public ExtractedMetaDataVersion extractMetaData(final File file, final String lang) throws IOException {
+    public ExtractedMetaDataVersion extractMetaData(final File file, final String lang) throws IOException, ExtractorException {
         ExtractedMetaDataVersion extractedMetaDataVersion = new ExtractedMetaDataVersion();
 
         String content = this.extractText(file, lang);

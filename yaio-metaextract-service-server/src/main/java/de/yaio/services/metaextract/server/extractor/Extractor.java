@@ -24,15 +24,16 @@ import java.io.InputStream;
  */
 public interface Extractor {
 
-    String extractText(InputStream input, String fileName, String lang) throws IOException;
+    String extractText(InputStream input, String fileName, String lang) throws IOException, ExtractorException;
 
-    String extractText(File file, String lang) throws IOException;
+    String extractText(File file, String lang) throws IOException, ExtractorException;
 
     String identifyLanguage(String text);
 
-    ExtractedMetaDataVersion extractMetaData(InputStream input, String fileName, String lang) throws IOException;
+    ExtractedMetaDataVersion extractMetaData(InputStream input, String fileName, String lang)
+            throws IOException, ExtractorException;
 
-    ExtractedMetaDataVersion extractMetaData(File file, String lang) throws IOException;
+    ExtractedMetaDataVersion extractMetaData(File file, String lang) throws IOException, ExtractorException;
 
     String getParserName();
 }
