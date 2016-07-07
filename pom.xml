@@ -28,6 +28,7 @@
         <module>yaio-metaextract-service-pom-springboot</module>
         <module>yaio-metaextract-service-pom-springboot-web</module>
         <module>yaio-metaextract-service-api</module>
+        <module>yaio-metaextract-service-client</module>
         <module>yaio-metaextract-service-server</module>
         <module>yaio-metaextract-service-full</module>
     </modules>

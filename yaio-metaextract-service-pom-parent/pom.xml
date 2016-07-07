@@ -65,6 +65,7 @@
 
         <yaio-metaextract-service-pom-parent.version>0.3.0-SNAPSHOT</yaio-metaextract-service-pom-parent.version>
         <yaio-metaextract-service-api.version>0.3.0-SNAPSHOT</yaio-metaextract-service-api.version>
+        <yaio-metaextract-service-client.version>0.3.0-SNAPSHOT</yaio-metaextract-service-client.version>
         <yaio-metaextract-service-pom-springboot.version>0.3.0-SNAPSHOT</yaio-metaextract-service-pom-springboot.version>
         <yaio-metaextract-service-pom-springboot-web.version>0.3.0-SNAPSHOT</yaio-metaextract-service-pom-springboot-web.version>
         <yaio-metaextract-service-server.version>0.3.0-SNAPSHOT</yaio-metaextract-service-server.version>
