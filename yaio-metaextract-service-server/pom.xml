@@ -44,7 +44,7 @@
         <dependency>
             <groupId>de.yaio.services</groupId>
             <artifactId>yaio-metaextract-service-api</artifactId>
-            <version>${yaio-metaextract-service-api.version}</version>
+            <version>0.3.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
 
