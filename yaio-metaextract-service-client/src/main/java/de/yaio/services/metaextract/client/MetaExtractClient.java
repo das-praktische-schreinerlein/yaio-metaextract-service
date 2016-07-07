@@ -73,13 +73,8 @@ public class MetaExtractClient {
         String baseUrl = metaextracturl + "/getByUrl";
         HttpEntity entity;
         HttpResponse response;
-        try {
-            response = HttpUtils.callPostUrlPure(baseUrl,
-                    metaextractusername, metaextractpassword, params, null, null);
-            entity = response.getEntity();
-        } catch (IOException ex) {
-            throw new IOExceptionWithCause("error while calling metaextracturl for url", url, ex);
-        }
+        response = HttpUtils.callPostUrlPure(baseUrl, metaextractusername, metaextractpassword, params, null, null);
+        entity = response.getEntity();
 
         // check response
         int retCode = response.getStatusLine().getStatusCode();
@@ -111,13 +106,8 @@ public class MetaExtractClient {
         String baseUrl = metaextracturl + "/getByFile";
         HttpEntity entity;
         HttpResponse response;
-        try {
-            response = HttpUtils.callPostUrlPure(baseUrl,
-                    metaextractusername, metaextractpassword, params, null, binfileParams);
-            entity = response.getEntity();
-        } catch (IOException ex) {
-            throw new IOExceptionWithCause("error while calling metaextracturl for fileName", fileName, ex);
-        }
+        response = HttpUtils.callPostUrlPure(baseUrl, metaextractusername, metaextractpassword, params, null, binfileParams);
+        entity = response.getEntity();
 
         // check response
         int retCode = response.getStatusLine().getStatusCode();
