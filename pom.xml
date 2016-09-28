@@ -12,7 +12,7 @@
     <!-- the base -->
     <groupId>de.yaio.services</groupId>
     <artifactId>yaio-metaextract-service</artifactId>
-    <version>0.3.0</version>
+    <version>0.4.0</version>
     <name>Yaio-MetaExtract-service</name>
     <description>YourAllInOne MetaExtract-Service</description>
     <url>https://github.com/das-praktische-schreinerlein/yaio-metaextract-service</url>

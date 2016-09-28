@@ -6,14 +6,14 @@
     <parent>
         <groupId>de.yaio.services</groupId>
         <artifactId>yaio-metaextract-service-pom-parent</artifactId>
-        <version>0.3.0</version>
+        <version>0.4.0</version>
         <relativePath>../yaio-metaextract-service-pom-parent/pom.xml</relativePath>
     </parent>
 
     <!-- the base -->
     <groupId>de.yaio.services</groupId>
     <artifactId>yaio-metaextract-service-client</artifactId>
-    <version>0.3.0</version>
+    <version>0.4.0</version>
     <name>yaio-metaextract-service-client</name>
     <description>a POM for client</description>
 
@@ -32,7 +32,7 @@
         <dependency>
             <groupId>de.yaio.services</groupId>
             <artifactId>yaio-metaextract-service-api</artifactId>
-            <version>0.3.0</version>
+            <version>0.4.0</version>
         </dependency>
     </dependencies>
 

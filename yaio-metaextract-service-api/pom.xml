@@ -6,14 +6,14 @@
     <parent>
         <groupId>de.yaio.services</groupId>
         <artifactId>yaio-metaextract-service-pom-parent</artifactId>
-        <version>0.3.0</version>
+        <version>0.4.0</version>
         <relativePath>../yaio-metaextract-service-pom-parent/pom.xml</relativePath>
     </parent>
 
     <!-- the base -->
     <groupId>de.yaio.services</groupId>
     <artifactId>yaio-metaextract-service-api</artifactId>
-    <version>0.3.0</version>
+    <version>0.4.0</version>
     <name>yaio-metaextract-service-api</name>
     <description>a POM for api</description>
 
@@ -23,4 +23,21 @@
     </properties>
     <packaging>${packaging.type}</packaging>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+    </dependencies>
 </project>
